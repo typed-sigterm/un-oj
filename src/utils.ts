@@ -1,3 +1,5 @@
+import type { HeadersInit } from 'bun';
+
 export { version } from '../package.json' with { type: 'json' };
 
 /** Get the first key of an object. */
@@ -10,7 +12,9 @@ export function getFirstKey<T extends Record<never, never>>(obj: T): keyof T {
  * @param s The string to parse.
  * @returns The time in milliseconds, or undefined if failed.
  */
-export function parseTime(s: string): number | undefined {
+export function parseTime(s?: string): number | undefined {
+  if (!s)
+    return;
   const val = Number.parseInt(s);
   if (Number.isNaN(val))
     return;
@@ -36,35 +40,31 @@ const MEMORY_UNITS: Record<string, number> = {
  * @param s The string to parse.
  * @returns The memory size in bytes, or undefined if failed.
  */
-export function parseMemory(s: string): number | undefined {
-  const [, val, unit] = s.match(/^(\d+) ([a-z]+)$/i) ?? [];
+export function parseMemory(s?: string): number | undefined {
+  const [, val, unit] = s?.match(/^(\d+) ([a-z]+)$/i) ?? [];
   if (!val || !unit)
     return;
-  return Number(val) * MEMORY_UNITS[unit];
+  return Number(val) * (MEMORY_UNITS[unit] ?? Number.NaN);
 }
 
 /**
  * Adds key-value pairs to the provided headers object if they aren't present.
  *
- * @param h The original headers object.
+ * @param init The original headers object.
  * @param add The key-value pairs to add.
  * @returns A **new** headers object.
  */
-export function addHeaders(h: HeadersInit | undefined, add: Array<[string, string]>): Record<string, string> {
-  if (h instanceof Headers)
-    h = h.toJSON();
-  if (Array.isArray(h))
-    h = Object.fromEntries(h);
-  else if (h == null)
-    h = {};
-  else
-    h = structuredClone(h);
-
-  for (const item of add) {
-    if (!(item[0] in h))
-      h[item[0]] = item[1];
-  }
-  return h;
+export function mergeHeaders(init: HeadersInit | undefined, add: Array<[string, string]>): Headers {
+  const ret = new Headers(
+    init instanceof Headers
+      ? init
+      : Array.isArray(init)
+        ? Object.fromEntries(init)
+        : init,
+  );
+  for (const item of add)
+    ret.append(item[0], item[1]);
+  return ret!;
 }
 
 /** General error class for UnOJ. */

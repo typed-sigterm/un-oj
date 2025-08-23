@@ -6,9 +6,6 @@ export default ts({
     'no-cond-assign': [0],
     'no-console': [2],
     'ts/explicit-function-return-type': [2],
-    'import/extensions': [2, 'ignorePackages', {
-      checkTypeImports: true,
-    }],
   },
 }, {
   files: ['scripts/*.ts'],

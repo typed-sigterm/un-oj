@@ -2,7 +2,7 @@ import type { $Fetch, CreateFetchOptions, FetchOptions } from 'ofetch';
 import type { Contest } from './contest.ts';
 import type { Problem } from './problem.ts';
 import { ofetch } from 'ofetch';
-import { addHeaders, UnOJError, version } from './utils.ts';
+import { mergeHeaders, UnOJError, version } from './utils.ts';
 
 /** General platform constructor options. */
 export interface PlatformOptions<Locale extends string | never = never> {
@@ -52,7 +52,7 @@ export abstract class Platform<Locale extends string | never = never> {
     this.ofetch = options?.ofetch ?? ofetch.create({
       ...options?.ofetchDefaults,
       baseURL: this.baseURL,
-      headers: addHeaders(headers, [['user-agent', `UnOJ/${version}`]]),
+      headers: mergeHeaders(headers, [['user-agent', `UnOJ/${version}`]]),
     }, options?.ofetchCreateOptions);
 
     this.locale = options?.locale ?? defaultLocale;

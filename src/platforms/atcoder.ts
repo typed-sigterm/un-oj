@@ -65,7 +65,7 @@ export default class AtCoder extends Platform<Locale> {
       .text()
       .trimStart()
       .split('\n')[0]
-      .split(' - ')[1];
+      ?.split(' - ')[1] ?? '';
     const descContainer = statement.find(`span.lang-${this.locale}`);
     const hr = descContainer.find('hr').first();
     if (hr.length) {
@@ -108,8 +108,8 @@ export default class AtCoder extends Platform<Locale> {
 
       description,
       samples,
-      timeLimit: parseTime(tlMatch![1])!,
-      memoryLimit: parseMemory(mlMatch![1])!,
+      timeLimit: parseTime(tlMatch?.[1])!,
+      memoryLimit: parseMemory(mlMatch?.[1])!,
 
       difficulty: undefined,
       tags: undefined,

@@ -8,7 +8,7 @@ import type { PlatformOptions } from '../platform.ts';
 import type { Problem as BaseProblem, ProblemDescriptionObject, TagInfo } from '../problem.ts';
 import { FetchError } from 'ofetch';
 import { NotFoundError, Platform } from '../platform.ts';
-import { addHeaders, UnOJError } from '../utils.ts';
+import { mergeHeaders, UnOJError } from '../utils.ts';
 
 export type ProblemType = 'traditional' | 'interactive' | 'communication' | 'submission';
 export type Difficulty = 0 | 1 | 2 | 3 | 4 | 5 | 6 | 7;
@@ -74,7 +74,7 @@ export default class Luogu extends Platform<string> {
       ...options,
       ofetchDefaults: {
         ...options?.ofetchDefaults,
-        headers: addHeaders(
+        headers: mergeHeaders(
           options?.ofetchDefaults?.headers,
           [['x-lentille-request', 'content-only'], ['x-luogu-type', 'content-only']],
         ),

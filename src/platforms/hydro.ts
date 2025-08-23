@@ -46,7 +46,7 @@ export function parseHydroProblem(pdoc: any, lang?: string): Problem {
   for (let i = 1, match: any; match = r(i, 'input').exec(content); i++) {
     samples.push({
       input: match[1].trim(),
-      output: r(i, 'output').exec(content)?.[1].trim() || '',
+      output: r(i, 'output').exec(content)?.[1]?.trim() || '',
     });
   }
 
