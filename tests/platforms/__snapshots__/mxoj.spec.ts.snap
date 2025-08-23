@@ -1,4 +1,4 @@
-// Bun Snapshot v1, https://goo.gl/fbAQLP
+// Bun Snapshot v1, http://goo.gl/fbAQLP
 
 exports[`MXOJ platform should fetch problem 1`] = `
 {
@@ -35,7 +35,7 @@ Hello, MXOJ!
 ,
   "difficulty": 1,
   "id": "A1",
-  "link": "https://oier.team/problems/A1",
+  "link": "http://oier.team/problems/A1",
   "memoryLimit": 536870912,
   "samples": [
     {
@@ -161,7 +161,7 @@ g++ grader.cpp guess.cpp -o guess -O2 -std=c++14 -static
 ,
   "difficulty": 0,
   "id": "B3",
-  "link": "https://oier.team/problems/B3",
+  "link": "http://oier.team/problems/B3",
   "memoryLimit": 536870912,
   "samples": [],
   "tags": [
@@ -219,7 +219,7 @@ exports[`MXOJ platform should fetch submission problem 1`] = `
 ,
   "difficulty": 0,
   "id": "B1",
-  "link": "https://oier.team/problems/B1",
+  "link": "http://oier.team/problems/B1",
   "memoryLimit": 268435456,
   "samples": [
     {
@@ -260,7 +260,7 @@ exports[`MXOJ platform should fetch objective problem 1`] = `
 ,
   "difficulty": 0,
   "id": "B5",
-  "link": "https://oier.team/problems/B5",
+  "link": "http://oier.team/problems/B5",
   "memoryLimit": 268435456,
   "samples": [],
   "tags": [

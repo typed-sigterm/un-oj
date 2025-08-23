@@ -23,7 +23,7 @@ const ProblemTypeOverridingTags: Partial<Record<string, ProblemType>> = {
   交互题: 'interactive',
 };
 
-export const DEFAULT_BASE_URL = 'https://oier.team';
+export const DEFAULT_BASE_URL = 'http://oier.team';
 
 /** MXOJ platform. */
 export default class MXOJ extends Platform {
