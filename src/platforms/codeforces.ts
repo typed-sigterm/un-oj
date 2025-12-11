@@ -133,7 +133,7 @@ export default class Codeforces extends Platform {
     };
   }
 
-  override async listContests(): Promise<Contest[]> {
+  override async listContests(offset: number = 0, limit: number = 100): Promise<Contest[]> {
     let response: any;
     try {
       response = await this.ofetch('/api/contest.list', {
@@ -150,7 +150,10 @@ export default class Codeforces extends Platform {
     if (!Array.isArray(contests))
       throw new UnexpectedResponseError(response);
 
-    return contests.map((contest: any) => ({
+    // Apply offset and limit to the results
+    const sliced = contests.slice(offset, offset + limit);
+
+    return sliced.map((contest: any) => ({
       id: String(contest.id),
       title: contest.name,
       description: '',

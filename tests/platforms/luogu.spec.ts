@@ -31,13 +31,24 @@ describe('Luogu platform (contest)', () => {
 describe('Luogu platform (contest list)', () => {
   const luogu = new Luogu();
 
-  it('should list contests', async () => {
-    const contests = await luogu.listContests(1);
+  it('should list contests with offset and limit', async () => {
+    const contests = await luogu.listContests(0, 5);
     expect(contests).toBeDefined();
     expect(Array.isArray(contests)).toBe(true);
     expect(contests.length).toBeGreaterThan(0);
+    expect(contests.length).toBeLessThanOrEqual(5);
     expect(contests[0]).toHaveProperty('id');
     expect(contests[0]).toHaveProperty('title');
     expect(contests[0]).toHaveProperty('format');
+  });
+
+  it('should fetch a stable contest', async () => {
+    // Test with a known stable contest ID
+    const contest = await luogu.getContest('48455');
+    expect(contest).toBeDefined();
+    expect(contest.id).toBe('48455');
+    expect(contest.title).toBeTruthy();
+    expect(contest.description).toBeTruthy();
+    expect(contest.format).toBeDefined();
   });
 });

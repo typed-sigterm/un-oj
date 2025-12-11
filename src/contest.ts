@@ -10,4 +10,6 @@ export interface Contest<
   startTime?: Date
   endTime?: Date
   problems: Problem extends never ? never : Problem[]
+  authors?: string[]
+  type?: string
 }

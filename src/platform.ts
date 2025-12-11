@@ -78,10 +78,11 @@ export abstract class Platform<Locale extends string | never = never> {
 
   /**
    * List contests from the platform.
-   * @param _page The page number (optional, platform-specific).
+   * @param _offset The offset for pagination (optional, platform-specific).
+   * @param _limit The limit for pagination (optional, platform-specific).
    * @returns An array of contest objects.
    */
-  listContests(_page?: number): Promise<Contest[]> {
+  listContests(_offset?: number, _limit?: number): Promise<Contest[]> {
     return Promise.reject(new UnsupportedError());
   }
 }

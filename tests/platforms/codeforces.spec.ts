@@ -37,16 +37,6 @@ describe('Codeforces platform', () => {
 describe('Codeforces platform (contest)', () => {
   const cf = new Codeforces();
 
-  it('should fetch contest', async () => {
-    const contest = await cf.getContest('1');
-    expect(contest).toBeDefined();
-    expect(contest.id).toBe('1');
-    expect(contest.title).toBeTruthy();
-    expect(contest.format).toBeTruthy();
-    expect(contest.problems).toBeDefined();
-    expect(Array.isArray(contest.problems)).toBe(true);
-  }, TIMEOUT);
-
   it('should throw NotFoundError w/ invalid contest ID', async () => {
     expect(cf.getContest('invalid')).rejects.toThrow(NotFoundError);
   }, TIMEOUT);
@@ -55,13 +45,26 @@ describe('Codeforces platform (contest)', () => {
 describe('Codeforces platform (contest list)', () => {
   const cf = new Codeforces();
 
-  it('should list contests', async () => {
-    const contests = await cf.listContests();
+  it('should list contests with offset and limit', async () => {
+    const contests = await cf.listContests(0, 10);
     expect(contests).toBeDefined();
     expect(Array.isArray(contests)).toBe(true);
     expect(contests.length).toBeGreaterThan(0);
+    expect(contests.length).toBeLessThanOrEqual(10);
     expect(contests[0]).toHaveProperty('id');
     expect(contests[0]).toHaveProperty('title');
     expect(contests[0]).toHaveProperty('format');
+  }, TIMEOUT);
+
+  it('should fetch a stable contest', async () => {
+    // Test with contest ID 1 which is a historical contest
+    const contest = await cf.getContest('1');
+    expect(contest).toBeDefined();
+    expect(contest.id).toBe('1');
+    expect(contest.title).toBe('Codeforces Beta Round 1');
+    expect(contest.format).toBe('ICPC');
+    expect(contest.problems).toBeDefined();
+    expect(Array.isArray(contest.problems)).toBe(true);
+    expect(contest.problems.length).toBeGreaterThan(0);
   }, TIMEOUT);
 });
