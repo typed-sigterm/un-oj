@@ -168,8 +168,11 @@ export default class Luogu extends Platform<string> {
 
   override async listContests(offset: number = 0, limit: number = 20): Promise<Contest[]> {
     const path = '/contest/list';
-    // Luogu API uses page-based pagination, so convert offset to page
-    const page = Math.floor(offset / limit) + 1;
+    // Luogu API uses page-based pagination
+    // We'll fetch the appropriate page and slice the results
+    const page = Math.floor(offset / 20) + 1; // Luogu returns ~20 contests per page
+    const pageOffset = offset % 20;
+
     let contests: any[];
     try {
       const data = await this.ofetch(path, {
@@ -185,9 +188,12 @@ export default class Luogu extends Platform<string> {
       throw new UnOJError('Failed to fetch contest list', { cause: e });
     }
 
+    // Slice the results based on the offset within the page and the requested limit
+    const sliced = contests.slice(pageOffset, pageOffset + limit);
+
     // Luogu list endpoint doesn't return full description, only basic info
     // Description is only available via getContest
-    return contests.slice(offset % limit, offset % limit + limit).map((contest: any) => ({
+    return sliced.map((contest: any) => ({
       id: String(contest.id),
       title: contest.name,
       description: '',
