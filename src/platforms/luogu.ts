@@ -168,28 +168,33 @@ export default class Luogu extends Platform<string> {
 
   override async listContests(offset: number = 0, limit: number = 20): Promise<Contest[]> {
     const path = '/contest/list';
-    // Luogu API uses page-based pagination
-    // We'll fetch the appropriate page and slice the results
-    const page = Math.floor(offset / 20) + 1; // Luogu returns ~20 contests per page
-    const pageOffset = offset % 20;
+    // Luogu API uses page-based pagination with approximately 20 contests per page
+    const CONTESTS_PER_PAGE = 20;
+    const startPage = Math.floor(offset / CONTESTS_PER_PAGE) + 1;
+    const pageOffset = offset % CONTESTS_PER_PAGE;
+    const endPage = Math.floor((offset + limit - 1) / CONTESTS_PER_PAGE) + 1;
 
-    let contests: any[];
-    try {
-      const data = await this.ofetch(path, {
-        responseType: 'json',
-        query: { page },
-      });
-      if (data.code !== 200)
-        throw new UnOJError('Failed to fetch contest list');
-      contests = data.currentData.contests.result;
-    } catch (e) {
-      if (e instanceof UnOJError)
-        throw e;
-      throw new UnOJError('Failed to fetch contest list', { cause: e });
+    const allContests: any[] = [];
+
+    // Fetch all required pages to satisfy the offset + limit request
+    for (let page = startPage; page <= endPage; page++) {
+      try {
+        const data = await this.ofetch(path, {
+          responseType: 'json',
+          query: { page },
+        });
+        if (data.code !== 200)
+          throw new UnOJError('Failed to fetch contest list');
+        allContests.push(...data.currentData.contests.result);
+      } catch (e) {
+        if (e instanceof UnOJError)
+          throw e;
+        throw new UnOJError('Failed to fetch contest list', { cause: e });
+      }
     }
 
-    // Slice the results based on the offset within the page and the requested limit
-    const sliced = contests.slice(pageOffset, pageOffset + limit);
+    // Slice the combined results based on the offset within the first page
+    const sliced = allContests.slice(pageOffset, pageOffset + limit);
 
     // Luogu list endpoint doesn't return full description, only basic info
     // Description is only available via getContest

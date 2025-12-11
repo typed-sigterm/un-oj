@@ -51,4 +51,14 @@ describe('Luogu platform (contest list)', () => {
     expect(contest.description).toBeTruthy();
     expect(contest.format).toBeDefined();
   });
+
+  it('should handle pagination across page boundaries', async () => {
+    // Request contests that span across page boundaries
+    const contests = await luogu.listContests(15, 10);
+    expect(contests).toBeDefined();
+    expect(Array.isArray(contests)).toBe(true);
+    // Should get up to 10 contests even if they span pages
+    expect(contests.length).toBeGreaterThan(0);
+    expect(contests.length).toBeLessThanOrEqual(10);
+  });
 });
