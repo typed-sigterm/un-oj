@@ -27,3 +27,17 @@ describe('Luogu platform (contest)', () => {
     expect(luogu.getContest('1919810')).rejects.toThrow(NotFoundError);
   });
 });
+
+describe('Luogu platform (contest list)', () => {
+  const luogu = new Luogu();
+
+  it('should list contests', async () => {
+    const contests = await luogu.listContests(1);
+    expect(contests).toBeDefined();
+    expect(Array.isArray(contests)).toBe(true);
+    expect(contests.length).toBeGreaterThan(0);
+    expect(contests[0]).toHaveProperty('id');
+    expect(contests[0]).toHaveProperty('title');
+    expect(contests[0]).toHaveProperty('format');
+  });
+});

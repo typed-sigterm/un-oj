@@ -1,4 +1,4 @@
-// Bun Snapshot v1, http://goo.gl/fbAQLP
+// Bun Snapshot v1, https://bun.sh/docs/test/snapshots
 
 exports[`MXOJ platform should fetch problem 1`] = `
 {

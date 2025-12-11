@@ -165,4 +165,32 @@ export default class Luogu extends Platform<string> {
       format: contest.ruleType,
     };
   }
+
+  override async listContests(page: number = 1): Promise<Contest[]> {
+    const path = '/contest/list';
+    let contests: any[];
+    try {
+      const data = await this.ofetch(path, {
+        responseType: 'json',
+        query: { page },
+      });
+      if (data.code !== 200)
+        throw new UnOJError('Failed to fetch contest list');
+      contests = data.currentData.contests.result;
+    } catch (e) {
+      if (e instanceof UnOJError)
+        throw e;
+      throw new UnOJError('Failed to fetch contest list', { cause: e });
+    }
+
+    return contests.map((contest: any) => ({
+      id: String(contest.id),
+      title: contest.name,
+      description: '',
+      startTime: contest.startTime && new Date(contest.startTime * 1000),
+      endTime: contest.endTime && new Date(contest.endTime * 1000),
+      problems: [],
+      format: contest.ruleType,
+    }));
+  }
 }
