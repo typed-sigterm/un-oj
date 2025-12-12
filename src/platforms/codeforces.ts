@@ -3,11 +3,12 @@
  * @module
  */
 
+import type { Contest as BaseContest } from '../contest.ts';
 import type { PlatformOptions } from '../platform.ts';
 import type { Problem as BaseProblem, ProblemIOSample } from '../problem.ts';
 import { load } from 'cheerio';
-import { NotFoundError, Platform } from '../platform.ts';
-import { parseMemory, parseTime } from '../utils.ts';
+import { NotFoundError, Platform, UnexpectedResponseError } from '../platform.ts';
+import { parseMemory, parseTime, UnOJError } from '../utils.ts';
 
 export type ProblemType = 'traditional' | 'interactive' | 'communication' | 'submission';
 
@@ -23,6 +24,20 @@ export type Problem = BaseProblem<
   string[],
   ProblemType
 >;
+
+export type ContestType = 'CF' | 'ICPC' | 'IOI';
+export type ContestPhase = 'BEFORE' | 'CODING' | 'PENDING_SYSTEM_TEST' | 'SYSTEM_TEST' | 'FINISHED';
+
+export interface ContestProblem {
+  contestId: number
+  index: string
+  name: string
+  type: string
+  rating?: number
+  tags: string[]
+}
+
+export type Contest = BaseContest<ContestProblem, ContestType, ContestPhase>;
 
 export const DEFAULT_BASE_URL = 'https://codeforces.com';
 
@@ -81,5 +96,75 @@ export default class Codeforces extends Platform {
         (_, el) => $(el).text().trim(),
       ).get(),
     };
+  }
+
+  override async getContest(id: string): Promise<Contest> {
+    const contestId = Number.parseInt(id);
+    if (Number.isNaN(contestId))
+      throw new NotFoundError('contest');
+
+    let response: any;
+    try {
+      response = await this.ofetch('/api/contest.standings', {
+        responseType: 'json',
+        query: { contestId, count: 1 },
+      });
+    } catch (e) {
+      throw new UnOJError(`Failed to fetch contest ${id}`, { cause: e });
+    }
+
+    if (response.status !== 'OK')
+      throw new UnexpectedResponseError(response);
+
+    const { contest, problems } = response.result;
+    if (!contest)
+      throw new NotFoundError('contest');
+
+    return {
+      id,
+      title: contest.name,
+      description: '',
+      format: contest.type,
+      phase: contest.phase,
+      startTime: contest.startTimeSeconds && new Date(contest.startTimeSeconds * 1000),
+      endTime: contest.startTimeSeconds && contest.durationSeconds
+        ? new Date((contest.startTimeSeconds + contest.durationSeconds) * 1000)
+        : undefined,
+      problems: problems || [],
+    };
+  }
+
+  override async listContests(offset: number = 0, limit: number = 100): Promise<Contest[]> {
+    let response: any;
+    try {
+      response = await this.ofetch('/api/contest.list', {
+        responseType: 'json',
+      });
+    } catch (e) {
+      throw new UnOJError('Failed to fetch contest list', { cause: e });
+    }
+
+    if (response.status !== 'OK')
+      throw new UnexpectedResponseError(response);
+
+    const contests = response.result;
+    if (!Array.isArray(contests))
+      throw new UnexpectedResponseError(response);
+
+    // Apply offset and limit to the results
+    const sliced = contests.slice(offset, offset + limit);
+
+    return sliced.map((contest: any) => ({
+      id: String(contest.id),
+      title: contest.name,
+      description: '',
+      format: contest.type,
+      phase: contest.phase,
+      startTime: contest.startTimeSeconds && new Date(contest.startTimeSeconds * 1000),
+      endTime: contest.startTimeSeconds && contest.durationSeconds
+        ? new Date((contest.startTimeSeconds + contest.durationSeconds) * 1000)
+        : undefined,
+      problems: [],
+    }));
   }
 }

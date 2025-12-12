@@ -59,7 +59,7 @@ export interface ContestProblem {
   }
 }
 
-export type Contest = BaseContest<ContestProblem, ContestFormat>;
+export type Contest = BaseContest<ContestProblem, ContestFormat, undefined>;
 
 export const DEFAULT_BASE_URL = 'https://www.luogu.com.cn';
 
@@ -164,5 +164,49 @@ export default class Luogu extends Platform<string> {
       problems: contestProblems ?? [],
       format: contest.ruleType,
     };
+  }
+
+  override async listContests(offset: number = 0, limit: number = 20): Promise<Contest[]> {
+    const path = '/contest/list';
+    // Luogu API uses page-based pagination with approximately 20 contests per page
+    const CONTESTS_PER_PAGE = 20;
+    const startPage = Math.floor(offset / CONTESTS_PER_PAGE) + 1;
+    const pageOffset = offset % CONTESTS_PER_PAGE;
+    const endPage = Math.floor((offset + limit - 1) / CONTESTS_PER_PAGE) + 1;
+
+    const allContests: any[] = [];
+
+    // Fetch all required pages to satisfy the offset + limit request
+    for (let page = startPage; page <= endPage; page++) {
+      try {
+        const data = await this.ofetch(path, {
+          responseType: 'json',
+          query: { page },
+        });
+        if (data.code !== 200)
+          throw new UnOJError('Failed to fetch contest list');
+        allContests.push(...data.currentData.contests.result);
+      } catch (e) {
+        if (e instanceof UnOJError)
+          throw e;
+        throw new UnOJError('Failed to fetch contest list', { cause: e });
+      }
+    }
+
+    // Slice the combined results based on the offset within the first page
+    const sliced = allContests.slice(pageOffset, pageOffset + limit);
+
+    // Luogu list endpoint doesn't return full description, only basic info
+    // Description is only available via getContest
+    return sliced.map((contest: any) => ({
+      id: String(contest.id),
+      title: contest.name,
+      description: '',
+      startTime: contest.startTime && new Date(contest.startTime * 1000),
+      endTime: contest.endTime && new Date(contest.endTime * 1000),
+      problems: [],
+      format: contest.ruleType,
+      authors: contest.host ? [contest.host.name] : undefined,
+    }));
   }
 }

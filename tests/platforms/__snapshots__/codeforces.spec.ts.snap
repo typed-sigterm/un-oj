@@ -1,4 +1,4 @@
-// Bun Snapshot v1, https://goo.gl/fbAQLP
+// Bun Snapshot v1, https://bun.sh/docs/test/snapshots
 
 exports[`Codeforces platform should fetch old problem 1`] = `
 {
@@ -29,121 +29,6 @@ exports[`Codeforces platform should fetch old problem 1`] = `
 `;
 
 exports[`Codeforces platform should fetch new problem 1`] = `
-{
-  "description": "<p>You are given three strings: $$$a$$$, $$$b$$$, and $$$c$$$, consisting of lowercase Latin letters. The string $$$c$$$ was obtained in the following way:</p><ol> <li> At each step, either string $$$a$$$ or string $$$b$$$ was randomly chosen, and the first character of the chosen string was removed from it and appended to the end of string $$$c$$$, until one of the strings ran out. After that, the remaining characters of the non-empty string were added to the end of $$$c$$$. </li><li> Then, a certain number of characters in string $$$c$$$ were randomly changed. </li></ol><p>For example, from the strings $$$a=\\color{red}{\\text{abra}}$$$ and $$$b=\\color{blue}{\\text{cada}}$$$, without character replacements, the strings $$$\\color{blue}{\\text{ca}}\\color{red}{\\text{ab}}\\color{blue}{\\text{d}}\\color{red}{\\text{ra}}\\color{blue}{\\text{a}}$$$, $$$\\color{red}{\\text{abra}}\\color{blue}{\\text{cada}}$$$, $$$\\color{red}{\\text{a}}\\color{blue}{\\text{cada}}\\color{red}{\\text{bra}}$$$ could be obtained.</p><p>Find the minimum number of characters that could have been changed in string $$$c$$$.</p>",
-  "difficulty": 1500,
-  "id": "2050E",
-  "link": "https://codeforces.com/problemset/problem/2050/E",
-  "memoryLimit": 268435456,
-  "samples": [
-    {
-      "input": "<div class="test-example-line test-example-line-even test-example-line-0">7</div><div class="test-example-line test-example-line-odd test-example-line-1">a</div><div class="test-example-line test-example-line-odd test-example-line-1">b</div><div class="test-example-line test-example-line-odd test-example-line-1">cb</div><div class="test-example-line test-example-line-even test-example-line-2">ab</div><div class="test-example-line test-example-line-even test-example-line-2">cd</div><div class="test-example-line test-example-line-even test-example-line-2">acbd</div><div class="test-example-line test-example-line-odd test-example-line-3">ab</div><div class="test-example-line test-example-line-odd test-example-line-3">ba</div><div class="test-example-line test-example-line-odd test-example-line-3">aabb</div><div class="test-example-line test-example-line-even test-example-line-4">xxx</div><div class="test-example-line test-example-line-even test-example-line-4">yyy</div><div class="test-example-line test-example-line-even test-example-line-4">xyxyxy</div><div class="test-example-line test-example-line-odd test-example-line-5">a</div><div class="test-example-line test-example-line-odd test-example-line-5">bcd</div><div class="test-example-line test-example-line-odd test-example-line-5">decf</div><div class="test-example-line test-example-line-even test-example-line-6">codes</div><div class="test-example-line test-example-line-even test-example-line-6">horse</div><div class="test-example-line test-example-line-even test-example-line-6">codeforces</div><div class="test-example-line test-example-line-odd test-example-line-7">egg</div><div class="test-example-line test-example-line-odd test-example-line-7">annie</div><div class="test-example-line test-example-line-odd test-example-line-7">egaegaeg</div>",
-      "output": 
-"1
-0
-2
-0
-3
-2
-3
-"
-,
-    },
-  ],
-  "tags": [
-    "dp",
-    "implementation",
-    "strings",
-  ],
-  "timeLimit": undefined,
-  "title": "Three Strings",
-  "type": "traditional",
-}
-`;
-
-exports[`Codeforces platform should fetch gym problem 1`] = `
-{
-  "description": "<p>March is visiting the beautiful city of Belobog!</p><p>The city of Belobog can be modeled through a coordinate system. March is currently at the point $$$(x_1,y_1)$$$ and she would like to get to the point $$$(x_2,y_2)$$$. </p><p>Due to technological advancements, most people prefer to teleport instead of walk. March can perform the following operation any number of times: </p><ul> <li> Choose two integers $$$x$$$ and $$$y$$$. Then, she will teleport to the location that is the reflection of her current location across the point $$$(x,y)$$$. </li></ul><p>Is it possible to reach $$$(x_2,y_2)$$$ through any number of operations?</p>",
-  "difficulty": undefined,
-  "id": "105863A",
-  "link": "https://codeforces.com/gym/105863/problem/A",
-  "memoryLimit": 268435456,
-  "samples": [
-    {
-      "input": "<div class="test-example-line test-example-line-even test-example-line-0">5</div><div class="test-example-line test-example-line-odd test-example-line-1">2 3 2 5</div><div class="test-example-line test-example-line-even test-example-line-2">-15 20 -31 24</div><div class="test-example-line test-example-line-odd test-example-line-3">24 31 93 77</div><div class="test-example-line test-example-line-even test-example-line-4">0 0 0 0</div><div class="test-example-line test-example-line-odd test-example-line-5">1000000000 999999999 -999999999 -1000000000</div>",
-      "output": 
-"YES
-YES
-NO
-YES
-NO
-"
-,
-    },
-  ],
-  "tags": [],
-  "timeLimit": 2000,
-  "title": "Reflecting",
-  "type": "traditional",
-}
-`;
-
-exports[`Codeforces platform should throw NotFoundError w/ non-existent problem 1`] = `
-{
-  "description": "<p>Theatre Square in the capital city of Berland has a rectangular shape with the size <span class="tex-span"><i>n</i> × <i>m</i></span> meters. On the occasion of the city's anniversary, a decision was taken to pave the Square with square granite flagstones. Each flagstone is of the size <span class="tex-span"><i>a</i> × <i>a</i></span>.</p><p>What is the least number of flagstones needed to pave the Square? It's allowed to cover the surface larger than the Theatre Square, but the Square has to be covered. It's not allowed to break the flagstones. The sides of flagstones should be parallel to the sides of the Square.</p>",
-  "difficulty": 1000,
-  "id": "1A",
-  "link": "https://codeforces.com/problemset/problem/1/A",
-  "memoryLimit": 268435456,
-  "samples": [
-    {
-      "input": 
-"6 6 4
-"
-,
-      "output": 
-"4
-"
-,
-    },
-  ],
-  "tags": [
-    "math",
-  ],
-  "timeLimit": 1000,
-  "title": "Theatre Square",
-  "type": "traditional",
-}
-`;
-
-exports[`Codeforces platform should throw NotFoundError w/ non-existent problem 2`] = `
-{
-  "description": "<p>March is visiting the beautiful city of Belobog!</p><p>The city of Belobog can be modeled through a coordinate system. March is currently at the point $$$(x_1,y_1)$$$ and she would like to get to the point $$$(x_2,y_2)$$$. </p><p>Due to technological advancements, most people prefer to teleport instead of walk. March can perform the following operation any number of times: </p><ul> <li> Choose two integers $$$x$$$ and $$$y$$$. Then, she will teleport to the location that is the reflection of her current location across the point $$$(x,y)$$$. </li></ul><p>Is it possible to reach $$$(x_2,y_2)$$$ through any number of operations?</p>",
-  "difficulty": undefined,
-  "id": "105863A",
-  "link": "https://codeforces.com/gym/105863/problem/A",
-  "memoryLimit": 268435456,
-  "samples": [
-    {
-      "input": "<div class="test-example-line test-example-line-even test-example-line-0">5</div><div class="test-example-line test-example-line-odd test-example-line-1">2 3 2 5</div><div class="test-example-line test-example-line-even test-example-line-2">-15 20 -31 24</div><div class="test-example-line test-example-line-odd test-example-line-3">24 31 93 77</div><div class="test-example-line test-example-line-even test-example-line-4">0 0 0 0</div><div class="test-example-line test-example-line-odd test-example-line-5">1000000000 999999999 -999999999 -1000000000</div>",
-      "output": 
-"YES
-YES
-NO
-YES
-NO
-"
-,
-    },
-  ],
-  "tags": [],
-  "timeLimit": 2000,
-  "title": "Reflecting",
-  "type": "traditional",
-}
-`;
-
-exports[`Codeforces platform should throw NotFoundError w/ non-existent problem 3`] = `
 {
   "description": "<p>You are given three strings: $$$a$$$, $$$b$$$, and $$$c$$$, consisting of lowercase Latin letters. The string $$$c$$$ was obtained in the following way:</p><ol> <li> At each step, either string $$$a$$$ or string $$$b$$$ was randomly chosen, and the first character of the chosen string was removed from it and appended to the end of string $$$c$$$, until one of the strings ran out. After that, the remaining characters of the non-empty string were added to the end of $$$c$$$. </li><li> Then, a certain number of characters in string $$$c$$$ were randomly changed. </li></ol><p>For example, from the strings $$$a=\\color{red}{\\text{abra}}$$$ and $$$b=\\color{blue}{\\text{cada}}$$$, without character replacements, the strings $$$\\color{blue}{\\text{ca}}\\color{red}{\\text{ab}}\\color{blue}{\\text{d}}\\color{red}{\\text{ra}}\\color{blue}{\\text{a}}$$$, $$$\\color{red}{\\text{abra}}\\color{blue}{\\text{cada}}$$$, $$$\\color{red}{\\text{a}}\\color{blue}{\\text{cada}}\\color{red}{\\text{bra}}$$$ could be obtained.</p><p>Find the minimum number of characters that could have been changed in string $$$c$$$.</p>",
   "difficulty": 1500,
@@ -213,35 +98,75 @@ exports[`Codeforces platform should fetch interactive problem 1`] = `
 }
 `;
 
-exports[`Codeforces platform should fetch problem 2`] = `
+exports[`Codeforces platform should fetch gym problem 1`] = `
 {
-  "description": "<p>You are given three strings: $$$a$$$, $$$b$$$, and $$$c$$$, consisting of lowercase Latin letters. The string $$$c$$$ was obtained in the following way:</p><ol> <li> At each step, either string $$$a$$$ or string $$$b$$$ was randomly chosen, and the first character of the chosen string was removed from it and appended to the end of string $$$c$$$, until one of the strings ran out. After that, the remaining characters of the non-empty string were added to the end of $$$c$$$. </li><li> Then, a certain number of characters in string $$$c$$$ were randomly changed. </li></ol><p>For example, from the strings $$$a=\\color{red}{\\text{abra}}$$$ and $$$b=\\color{blue}{\\text{cada}}$$$, without character replacements, the strings $$$\\color{blue}{\\text{ca}}\\color{red}{\\text{ab}}\\color{blue}{\\text{d}}\\color{red}{\\text{ra}}\\color{blue}{\\text{a}}$$$, $$$\\color{red}{\\text{abra}}\\color{blue}{\\text{cada}}$$$, $$$\\color{red}{\\text{a}}\\color{blue}{\\text{cada}}\\color{red}{\\text{bra}}$$$ could be obtained.</p><p>Find the minimum number of characters that could have been changed in string $$$c$$$.</p>",
-  "difficulty": 1500,
-  "id": "2050E",
-  "link": "https://codeforces.com/problemset/problem/2050/E",
+  "description": "<p>March is visiting the beautiful city of Belobog!</p><p>The city of Belobog can be modeled through a coordinate system. March is currently at the point $$$(x_1,y_1)$$$ and she would like to get to the point $$$(x_2,y_2)$$$. </p><p>Due to technological advancements, most people prefer to teleport instead of walk. March can perform the following operation any number of times: </p><ul> <li> Choose two integers $$$x$$$ and $$$y$$$. Then, she will teleport to the location that is the reflection of her current location across the point $$$(x,y)$$$. </li></ul><p>Is it possible to reach $$$(x_2,y_2)$$$ through any number of operations?</p>",
+  "difficulty": undefined,
+  "id": "105863A",
+  "link": "https://codeforces.com/gym/105863/problem/A",
   "memoryLimit": 268435456,
   "samples": [
     {
-      "input": "<div class="test-example-line test-example-line-even test-example-line-0">7</div><div class="test-example-line test-example-line-odd test-example-line-1">a</div><div class="test-example-line test-example-line-odd test-example-line-1">b</div><div class="test-example-line test-example-line-odd test-example-line-1">cb</div><div class="test-example-line test-example-line-even test-example-line-2">ab</div><div class="test-example-line test-example-line-even test-example-line-2">cd</div><div class="test-example-line test-example-line-even test-example-line-2">acbd</div><div class="test-example-line test-example-line-odd test-example-line-3">ab</div><div class="test-example-line test-example-line-odd test-example-line-3">ba</div><div class="test-example-line test-example-line-odd test-example-line-3">aabb</div><div class="test-example-line test-example-line-even test-example-line-4">xxx</div><div class="test-example-line test-example-line-even test-example-line-4">yyy</div><div class="test-example-line test-example-line-even test-example-line-4">xyxyxy</div><div class="test-example-line test-example-line-odd test-example-line-5">a</div><div class="test-example-line test-example-line-odd test-example-line-5">bcd</div><div class="test-example-line test-example-line-odd test-example-line-5">decf</div><div class="test-example-line test-example-line-even test-example-line-6">codes</div><div class="test-example-line test-example-line-even test-example-line-6">horse</div><div class="test-example-line test-example-line-even test-example-line-6">codeforces</div><div class="test-example-line test-example-line-odd test-example-line-7">egg</div><div class="test-example-line test-example-line-odd test-example-line-7">annie</div><div class="test-example-line test-example-line-odd test-example-line-7">egaegaeg</div>",
+      "input": "<div class="test-example-line test-example-line-even test-example-line-0">5</div><div class="test-example-line test-example-line-odd test-example-line-1">2 3 2 5</div><div class="test-example-line test-example-line-even test-example-line-2">-15 20 -31 24</div><div class="test-example-line test-example-line-odd test-example-line-3">24 31 93 77</div><div class="test-example-line test-example-line-even test-example-line-4">0 0 0 0</div><div class="test-example-line test-example-line-odd test-example-line-5">1000000000 999999999 -999999999 -1000000000</div>",
       "output": 
-"1
-0
-2
-0
-3
-2
-3
+"YES
+YES
+NO
+YES
+NO
 "
 ,
     },
   ],
-  "tags": [
-    "dp",
-    "implementation",
-    "strings",
-  ],
-  "timeLimit": undefined,
-  "title": "Three Strings",
+  "tags": [],
+  "timeLimit": 2000,
+  "title": "Reflecting",
   "type": "traditional",
+}
+`;
+
+exports[`Codeforces platform (contest list) should fetch a stable contest 1`] = `
+{
+  "description": "",
+  "endTime": 2010-02-19T14:00:00.000Z,
+  "format": "ICPC",
+  "id": "1",
+  "phase": "FINISHED",
+  "problems": [
+    {
+      "contestId": 1,
+      "index": "A",
+      "name": "Theatre Square",
+      "rating": 1000,
+      "tags": [
+        "math",
+      ],
+      "type": "PROGRAMMING",
+    },
+    {
+      "contestId": 1,
+      "index": "B",
+      "name": "Spreadsheet",
+      "rating": 1600,
+      "tags": [
+        "implementation",
+        "math",
+      ],
+      "type": "PROGRAMMING",
+    },
+    {
+      "contestId": 1,
+      "index": "C",
+      "name": "Ancient Berland Circus",
+      "rating": 2100,
+      "tags": [
+        "geometry",
+        "math",
+      ],
+      "type": "PROGRAMMING",
+    },
+  ],
+  "startTime": 2010-02-19T12:00:00.000Z,
+  "title": "Codeforces Beta Round 1",
 }
 `;

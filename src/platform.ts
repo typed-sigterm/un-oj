@@ -75,6 +75,16 @@ export abstract class Platform<Locale extends string | never = never> {
   getContest(_id: string): Promise<Contest> {
     return Promise.reject(new UnsupportedError());
   }
+
+  /**
+   * List contests from the platform.
+   * @param _offset The offset for pagination (optional, platform-specific).
+   * @param _limit The limit for pagination (optional, platform-specific).
+   * @returns An array of contest objects.
+   */
+  listContests(_offset?: number, _limit?: number): Promise<Contest[]> {
+    return Promise.reject(new UnsupportedError());
+  }
 }
 
 /** An error that indicates a platform does not support a certain operation. */

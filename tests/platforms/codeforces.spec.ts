@@ -33,3 +33,31 @@ describe('Codeforces platform', () => {
     expect(cf.getProblem('114514A')).rejects.toThrow(NotFoundError);
   }, TIMEOUT);
 });
+
+describe('Codeforces platform (contest)', () => {
+  const cf = new Codeforces();
+
+  it('should throw NotFoundError w/ invalid contest ID', async () => {
+    expect(cf.getContest('invalid')).rejects.toThrow(NotFoundError);
+  }, TIMEOUT);
+});
+
+describe('Codeforces platform (contest list)', () => {
+  const cf = new Codeforces();
+
+  it('should list contests with offset and limit', async () => {
+    const contests = await cf.listContests(0, 10);
+    expect(contests).toBeDefined();
+    expect(Array.isArray(contests)).toBe(true);
+    expect(contests.length).toBeGreaterThan(0);
+    expect(contests.length).toBeLessThanOrEqual(10);
+    expect(contests[0]).toHaveProperty('id');
+    expect(contests[0]).toHaveProperty('title');
+    expect(contests[0]).toHaveProperty('format');
+  }, TIMEOUT);
+
+  it('should fetch a stable contest', async () => {
+    // Test with contest ID 1 which is a historical contest
+    expect(await cf.getContest('1')).toMatchSnapshot();
+  }, TIMEOUT);
+});

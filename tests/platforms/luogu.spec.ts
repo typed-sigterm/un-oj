@@ -27,3 +27,33 @@ describe('Luogu platform (contest)', () => {
     expect(luogu.getContest('1919810')).rejects.toThrow(NotFoundError);
   });
 });
+
+describe('Luogu platform (contest list)', () => {
+  const luogu = new Luogu();
+
+  it('should list contests with offset and limit', async () => {
+    const contests = await luogu.listContests(0, 5);
+    expect(contests).toBeDefined();
+    expect(Array.isArray(contests)).toBe(true);
+    expect(contests.length).toBeGreaterThan(0);
+    expect(contests.length).toBeLessThanOrEqual(5);
+    expect(contests[0]).toHaveProperty('id');
+    expect(contests[0]).toHaveProperty('title');
+    expect(contests[0]).toHaveProperty('format');
+  });
+
+  it('should fetch a stable contest', async () => {
+    // Test with a known stable contest ID
+    expect(await luogu.getContest('48455')).toMatchSnapshot();
+  });
+
+  it('should handle pagination across page boundaries', async () => {
+    // Request contests that span across page boundaries
+    const contests = await luogu.listContests(15, 10);
+    expect(contests).toBeDefined();
+    expect(Array.isArray(contests)).toBe(true);
+    // Should get up to 10 contests even if they span pages
+    expect(contests.length).toBeGreaterThan(0);
+    expect(contests.length).toBeLessThanOrEqual(10);
+  });
+});
