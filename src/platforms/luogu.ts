@@ -59,7 +59,7 @@ export interface ContestProblem {
   }
 }
 
-export type Contest = BaseContest<ContestProblem, ContestFormat>;
+export type Contest = BaseContest<ContestProblem, ContestFormat, undefined>;
 
 export const DEFAULT_BASE_URL = 'https://www.luogu.com.cn';
 

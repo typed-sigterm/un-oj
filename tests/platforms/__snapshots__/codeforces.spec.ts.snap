@@ -131,6 +131,7 @@ exports[`Codeforces platform (contest list) should fetch a stable contest 1`] = 
   "endTime": 2010-02-19T14:00:00.000Z,
   "format": "ICPC",
   "id": "1",
+  "phase": "FINISHED",
   "problems": [
     {
       "contestId": 1,

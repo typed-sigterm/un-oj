@@ -37,7 +37,7 @@ export interface ContestProblem {
   tags: string[]
 }
 
-export type Contest = BaseContest<ContestProblem, ContestType>;
+export type Contest = BaseContest<ContestProblem, ContestType, ContestPhase>;
 
 export const DEFAULT_BASE_URL = 'https://codeforces.com';
 
@@ -125,6 +125,7 @@ export default class Codeforces extends Platform {
       title: contest.name,
       description: '',
       format: contest.type,
+      phase: contest.phase,
       startTime: contest.startTimeSeconds && new Date(contest.startTimeSeconds * 1000),
       endTime: contest.startTimeSeconds && contest.durationSeconds
         ? new Date((contest.startTimeSeconds + contest.durationSeconds) * 1000)
@@ -158,6 +159,7 @@ export default class Codeforces extends Platform {
       title: contest.name,
       description: '',
       format: contest.type,
+      phase: contest.phase,
       startTime: contest.startTimeSeconds && new Date(contest.startTimeSeconds * 1000),
       endTime: contest.startTimeSeconds && contest.durationSeconds
         ? new Date((contest.startTimeSeconds + contest.durationSeconds) * 1000)
