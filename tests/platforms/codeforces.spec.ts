@@ -58,13 +58,6 @@ describe('Codeforces platform (contest list)', () => {
 
   it('should fetch a stable contest', async () => {
     // Test with contest ID 1 which is a historical contest
-    const contest = await cf.getContest('1');
-    expect(contest).toBeDefined();
-    expect(contest.id).toBe('1');
-    expect(contest.title).toBe('Codeforces Beta Round 1');
-    expect(contest.format).toBe('ICPC');
-    expect(contest.problems).toBeDefined();
-    expect(Array.isArray(contest.problems)).toBe(true);
-    expect(contest.problems.length).toBeGreaterThan(0);
+    expect(await cf.getContest('1')).toMatchSnapshot();
   }, TIMEOUT);
 });

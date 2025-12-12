@@ -44,12 +44,7 @@ describe('Luogu platform (contest list)', () => {
 
   it('should fetch a stable contest', async () => {
     // Test with a known stable contest ID
-    const contest = await luogu.getContest('48455');
-    expect(contest).toBeDefined();
-    expect(contest.id).toBe('48455');
-    expect(contest.title).toBeTruthy();
-    expect(contest.description).toBeTruthy();
-    expect(contest.format).toBeDefined();
+    expect(await luogu.getContest('48455')).toMatchSnapshot();
   });
 
   it('should handle pagination across page boundaries', async () => {

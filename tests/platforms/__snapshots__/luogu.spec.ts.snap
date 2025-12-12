@@ -254,3 +254,120 @@ Div.1 前 3 名可以获得随机题材本子一本，大陆地区包邮。3 个
   "title": "【LGR-088】洛谷 8 月月赛 & 「PMOI」Round · 04 Div.1",
 }
 `;
+
+exports[`Luogu platform (contest list) should fetch a stable contest 1`] = `
+{
+  "description": 
+"## 简介
+
+本场比赛为【LGR-088】洛谷 8 月月赛 & 「PMOI」Round · 04，简称 LGR-088 & PMOI R4。
+
+本场比赛时间为 2021 年 8 月 20 日星期五，下午 14:00 ~ 18:00。
+
+本场比赛分 Div 进行。Div.1 偏难，Div.2 较简单。
+
+本场比赛工作人员：
+
+出题人：[lnlhm](https://www.luogu.com.cn/user/179871)，[lndjy](https://www.luogu.com.cn/user/196899)，[ducati](https://www.luogu.com.cn/user/87064)，[Silver187](https://www.luogu.com.cn/user/154560)，[noip](https://www.luogu.com.cn/user/3296)。  
+验题人：[ducati](https://www.luogu.com.cn/user/87064)，[Silver187](https://www.luogu.com.cn/user/154560)，[lndjy](https://www.luogu.com.cn/user/196899)，[b6e0](https://www.luogu.com.cn/user/150522)，[wxy_](https://www.luogu.com.cn/user/317459)，[lnlhm](https://www.luogu.com.cn/user/179871)，[pocafup](https://www.luogu.com.cn/user/219099)。  
+审题人：[_sys](/user/49093)。  
+总负责人：[lndjy](https://www.luogu.com.cn/user/196899)。
+
+
+| 编号 | 名称 | 类型 | 出题人 | 验题人 | 
+|:-:|:-:|:-:|:-:|:-:|
+| A | 人赢 | 传统 | lnlhm | lndjy | 
+| B | 生成树 | 传统 | lndjy | ducati | 
+| C | 可怜的团主 | 传统 | ducati | b6e0 | 
+| D | 猜排列 | 交互 | Silver187 | ducati | 
+| E | 排列变换 | 传统 | ducati | Silver187 | 
+| F | [Ynoi2007]TB5x | 交互 | noip | noip |
+
+PMOI 历经 4 个月的精心准备，以月赛的形式再次与大家见面，~~虽说审核比赛时出了一些小插曲~~，但比赛的质量较以往也有了大幅的提升。
+
+## 知乎评价通道
+
+<http://www.zhihu.com/question/476730275>
+
+## 奖品
+
+Div.1 前 3 名可以获得随机题材本子一本，大陆地区包邮。3 个月内获得过奖品的优秀选手不再重复颁奖，资格顺延。
+
+## 直播讲解
+
+比赛赛后将提供直播视频讲解，主讲人 [ducati](https://www.luogu.com.cn/user/87064)、[lnlhm](https://www.luogu.com.cn/user/179871)、[noip](https://www.luogu.com.cn/user/3296)。
+
+**时间：8 月 20 日（比赛当日）19 时。**
+
+上车需买票，票价 10 元。如果错过直播讲解也没关系，买票上车后，依然可以观看回放。
+
+题解在比赛结束后向报名讲评的同学先行公开，题解通道将于赛后 3 日开放。
+
+**购票上车/观看讲评地址：<https://class.luogu.com.cn/course/lgr88>。**
+
+## 提示
+
+1. **本场比赛有 6 道题目**，为 IOI 赛制，**IOI 赛制以最后一次提交为准**。
+
+2. 本次比赛**计入 Rating**，根据比赛成绩进行积分，影响咕值。同时参加两个 Div 的选手，只计算其中**相对排名较高**的一场的 Rating。**不会因为参加比赛而降 Rating**，请放心参加。
+
+3. 严禁开小号/和他人分享答案以达成任何目的，或者直接套用非本人编写的代码。本次比赛将**使用反作弊系统**，因为任何原因被反作弊系统发现（包括多人套用同一个互联网公开的代码）、被举报或在抽查代码是发现选手有影响比赛成绩公平性的行为，视情节严重性给予取消成绩、警告性棕名或者封号的处罚。
+
+
+4. 如果发现比赛有原题或其他影响公平性的因素，请私聊管理员和出题人，而不要以任何方式公开，违者视影响可能会得到警告性棕名或禁言的惩罚。
+
+## 广告
+
+虽然 CSP 第一轮（初赛）对大多数同学来说都不是事，但如果对即将到来的第一轮感到担心，那么可以报名洛谷初赛辅导课程进行知识点的梳理，并模拟赛查缺补漏。[【点击查看报名>>】](https://class.luogu.com.cn/course/yugu21acs)
+
+[![](https://cdn.luogu.com.cn/upload/image_hosting/7vosh5tt.png)](https://class.luogu.com.cn/course/yugu21acs)"
+,
+  "endTime": 2021-08-20T10:00:00.000Z,
+  "format": 4,
+  "id": "48455",
+  "problems": [
+    {
+      "problem": {
+        "difficulty": 6,
+        "fullScore": 100,
+        "pid": "P7320",
+        "title": "「PMOI-4」可怜的团主",
+        "type": "P",
+      },
+      "score": 100,
+    },
+    {
+      "problem": {
+        "difficulty": 5,
+        "fullScore": 100,
+        "pid": "P7321",
+        "title": "「PMOI-4」猜排列",
+        "type": "P",
+      },
+      "score": 100,
+    },
+    {
+      "problem": {
+        "difficulty": 5,
+        "fullScore": 100,
+        "pid": "P7322",
+        "title": "「PMOI-4」排列变换",
+        "type": "P",
+      },
+      "score": 100,
+    },
+    {
+      "problem": {
+        "difficulty": 7,
+        "fullScore": 100,
+        "pid": "P7723",
+        "title": "[Ynoi2007] TB5x",
+        "type": "P",
+      },
+      "score": 100,
+    },
+  ],
+  "startTime": 2021-08-20T06:00:00.000Z,
+  "title": "【LGR-088】洛谷 8 月月赛 & 「PMOI」Round · 04 Div.1",
+}
+`;
