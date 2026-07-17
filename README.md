@@ -37,7 +37,7 @@ Currently supported platforms:
 
 Documents are available on [JSR](https://jsr.io/@un-oj/core/doc).
 
-## Compataility
+## Compatibility
 
 UnOJ uses internal APIs, or parses HTML from some OJ, which may be changed at
 any time. If you encountered any problems, feel free to open an issue.
