@@ -103,6 +103,6 @@ export class NotFoundError extends UnOJError {
 
 export class UnexpectedResponseError extends UnOJError {
   constructor(public data?: unknown) {
-    super('Unexpected response, see the "Compabtibility" section of README.md of @un-oj/core (or un-oj) package.');
+    super('Unexpected response, see the "Compatibility" section of README.md of @un-oj/core (or un-oj) package.');
   }
 }
