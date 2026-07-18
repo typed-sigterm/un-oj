@@ -1,6 +1,7 @@
 import type { HeadersInit } from 'bun';
+import pkg from '../package.json' with { type: 'json' };
 
-export { version } from '../package.json' with { type: 'json' };
+export const version: string = pkg.version;
 
 /** Get the first key of an object. */
 export function getFirstKey<T extends Record<never, never>>(obj: T): keyof T {
