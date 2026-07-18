@@ -1,0 +1,70 @@
+// Bun Snapshot v1, https://bun.sh/docs/test/snapshots
+
+exports[`NowCoder platform should fetch a stable problem (NOIP2002 字串变换) 1`] = `
+{
+  "description": {
+    "background": "",
+    "details": "已知有两个字串 A, B及一组字串变换的规则（至多6个规则）:<br> A<sub>1</sub> -&gt; B<sub>1</sub><br> A<sub>2</sub> -&gt;        B<sub>2</sub><br> 规则的含义为：在A中的子串 A<sub>1</sub>可以变换为 B<sub>1</sub>、A<sub>2</sub>可以变换为 B<sub>2</sub> …。<br> 例如：A＝'abcd'　B＝'xyz'<br> 变换规则为：<br> ‘abc’-&gt;‘xu’　‘ud’-&gt;‘y’　‘y’-&gt;‘yz’<br> 则此时，A        可以经过一系列的变换变为        B，其变换的过程为：<br> ‘abcd’-&gt;‘xud’-&gt;‘xy’-&gt;‘xyz’<br> 共进行了三次变换，使得A变换为B。",
+    "hint": "",
+    "input": "<div>输入格式如下：</div><div>A B<br></div><div>A<sub>1</sub> B<sub>1</sub> \\<br></div><div>A<sub>2</sub> B<sub>2</sub>&nbsp; |-&gt; 变换规则<br></div><div>... ... / <br></div><div>所有字符串长度的上限为 20。</div><div><br></div>",
+    "output": "输出格式如下：<br>若在10步（包含 10步）以内能将A变换为B，则输出最少的变换步数；否则输出"NO ANSWER!"",
+  },
+  "difficulty": undefined,
+  "id": "16742",
+  "link": "https://ac.nowcoder.com/acm/problem/16742",
+  "memoryLimit": 134217728,
+  "samples": [
+    {
+      "input": 
+"abcd xyz
+abc xu
+ud y
+y yz"
+,
+      "output": "3",
+    },
+  ],
+  "tags": undefined,
+  "timeLimit": 1000,
+  "title": "[NOIP2002]字串变换",
+  "type": "traditional",
+}
+`;
+
+exports[`NowCoder platform should fetch another stable problem 1`] = `
+{
+  "description": {
+    "background": "",
+    "details": "我们可以用这样的方式来表示一个十进制数： 将每个阿拉伯数字乘以一个以该数字所处位置的值减1为指数，以10为底数的幂之和的形式。例如：123可表示为 1*10<sup>2</sup>＋2*10<sup>1</sup>＋3*10<sup>0</sup>这样的形式。<br> 与之相似的，对二进制数来说，也可表示成每个二进制数码乘以一个以该数字所处位置的值-1为指数，以2为底数的幂之和的形式。一般说来，任何一个正整数Ｒ或一个负整数-Ｒ都可以被选来，作为一个数制系统的基数。如果是以Ｒ或-Ｒ为基数，则需要用到的数码为 0，1，．．．．Ｒ-1。例如，当Ｒ＝7时，所需用到的数码是0，1，2，3，4，5和6，这与其是Ｒ或-Ｒ无关。如果作为基数的数绝对值超过10，则为了表示这些数码，通常使用英文字母来表示那些大于9的数码。例如对16进制数来说，用Ａ表示10，用Ｂ表示11，用Ｃ表示12，用Ｄ表示13，用Ｅ表示14，用Ｆ表示15。<br> 在负进制数中是用-Ｒ 作为基数，例如-15(十进制)相当于110001(-2进制)，并且它可以被表示为2的幂级数的和数：<br> 110001＝1*(-2)<sup>5</sup>＋1*(-2)<sup>4</sup>＋0*(-2)<sup>3</sup>＋0*(-2)<sup>2</sup>＋0*(-2)<sup>1</sup> ＋1*(-2)<sup>0</sup><br> 设计一个程序，读入一个十进制数和一个负进制数的基数, 并将此十进制数转换为此负进制下的数：-Ｒ∈｛-2，-3，-4，．．．，-20｝<br>",
+    "hint": "",
+    "input": "第一个是十进制数N(-32768 ≤ N ≤ 32767)；  第二个是负进制数的基数-R。",
+    "output": "输出此负进制数及其基数，若此基数超过10，则参照16进制的方式处理。",
+  },
+  "difficulty": undefined,
+  "id": "16756",
+  "link": "https://ac.nowcoder.com/acm/problem/16756",
+  "memoryLimit": 268435456,
+  "samples": [
+    {
+      "input": "30000 -2",
+      "output": "30000=11011010101110000(base-2)",
+    },
+    {
+      "input": "-20000 -2",
+      "output": "-20000=1111011000100000(base-2)",
+    },
+    {
+      "input": "28800 -16",
+      "output": "28800=19180(base-16)",
+    },
+    {
+      "input": "-25000 -16",
+      "output": "-25000=7FB8(base-16)",
+    },
+  ],
+  "tags": undefined,
+  "timeLimit": 1000,
+  "title": "进制转换",
+  "type": "traditional",
+}
+`;
