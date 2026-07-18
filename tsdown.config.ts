@@ -1,6 +1,6 @@
 import { defineConfig } from 'tsdown';
-import { exports } from './jsr.json';
+import jsr from './jsr.json' with { type: 'json' };
 
 export default defineConfig({
-  entry: Object.values(exports),
+  entry: Object.values(jsr.exports),
 });
