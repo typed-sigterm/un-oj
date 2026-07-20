@@ -1,5 +1,6 @@
 import { NotFoundError } from '@un-oj/core';
 import SPOJ from '@un-oj/core/platforms/spoj';
+import { UnOJError } from '@un-oj/core/utils';
 import { describe, expect, it } from 'bun:test';
 import { assertProblem } from './utils.ts';
 
@@ -7,7 +8,7 @@ import { assertProblem } from './utils.ts';
 // clients (curl / ofetch), so the live-HTTP + snapshot pattern used by the
 // other platform tests is not viable here. Instead we drive the adapter with a
 // fake underlying `fetch` (via `ofetchCreateOptions.fetch`) that returns a
-// canned HTML fixture modeled on a real SPOJ problem page. See NOTES.md.
+// canned HTML fixture modeled on a real SPOJ problem page.
 
 // Minimal, faithful reconstruction of `https://www.spoj.com/problems/TEST/`.
 const TEST_HTML = `<!DOCTYPE html>
@@ -55,15 +56,19 @@ Output:
 </body>
 </html>`;
 
+/** Builds a SPOJ instance with a custom underlying `fetch`. */
+function makeSpojWithFetch(fetchImpl: typeof fetch): SPOJ {
+  return new SPOJ({ ofetchCreateOptions: { fetch: fetchImpl } });
+}
+
 /** Builds a SPOJ instance whose underlying `fetch` serves `html` (or a 404 for `notFoundId`). */
 function makeSpoj(html: string, notFoundId?: string): SPOJ {
-  const fakeFetch = ((...args: Parameters<typeof fetch>): Promise<Response> => {
+  return makeSpojWithFetch(((...args: Parameters<typeof fetch>): Promise<Response> => {
     const url = String(args[0]);
     if (notFoundId && url.includes(`/problems/${notFoundId}/`))
       return Promise.resolve(new Response('', { status: 404, statusText: 'Not Found' }));
     return Promise.resolve(new Response(html, { status: 200, headers: { 'content-type': 'text/html; charset=utf-8' } }));
-  }) as typeof fetch;
-  return new SPOJ({ ofetchCreateOptions: { fetch: fakeFetch } });
+  }) as typeof fetch);
 }
 
 describe('SPOJ platform', () => {
@@ -75,5 +80,31 @@ describe('SPOJ platform', () => {
   it('should throw NotFoundError w/ non-existent problem', async () => {
     const spoj = makeSpoj(TEST_HTML, 'NONEXISTENT');
     await expect(spoj.getProblem('NONEXISTENT')).rejects.toThrow(NotFoundError);
+  });
+
+  // Cloudflare managed-challenge pages return 200 with JS-challenge HTML that
+  // has no `#problem-body`; the adapter should surface this as NotFoundError.
+  it('should throw NotFoundError when #problem-body is missing (e.g. Cloudflare challenge)', async () => {
+    const spoj = makeSpoj('<!DOCTYPE html><html><body><h1>Just a moment...</h1></body></html>');
+    await expect(spoj.getProblem('TEST')).rejects.toThrow(NotFoundError);
+  });
+
+  it('should throw UnOJError on non-404 fetch failure (e.g. HTTP 500)', async () => {
+    const spoj = makeSpojWithFetch(((..._args: Parameters<typeof fetch>): Promise<Response> =>
+      Promise.resolve(new Response('', { status: 500, statusText: 'Internal Server Error' }))) as typeof fetch);
+    await expect(spoj.getProblem('TEST')).rejects.toThrow(UnOJError);
+    await expect(spoj.getProblem('TEST')).rejects.not.toThrow(NotFoundError);
+  });
+
+  it('should throw NotFoundError when title is missing', async () => {
+    const spoj = makeSpoj('<div id="problem-body"><p>statement without a heading</p></div>');
+    await expect(spoj.getProblem('TEST')).rejects.toThrow(NotFoundError);
+  });
+
+  it('should throw NotFoundError when description is missing', async () => {
+    // #problem-body has a title but nothing else; after the title is stripped,
+    // the description is empty.
+    const spoj = makeSpoj('<div id="problem-body"><h2>TEST - Title</h2></div>');
+    await expect(spoj.getProblem('TEST')).rejects.toThrow(NotFoundError);
   });
 });
