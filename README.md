@@ -34,6 +34,7 @@ Currently supported platforms:
 - [Lyrio](https://jsr.io/@un-oj/core/doc/platforms/lyrio) (LibreOJ) (`/platforms/lyrio`)
 - [Luogu](https://jsr.io/@un-oj/core/doc/platforms/luogu) (`/platforms/luogu`)
 - [MXOJ](https://jsr.io/@un-oj/core/doc/platforms/mxoj) (`/platforms/mxoj`)
+- [SPOJ](https://jsr.io/@un-oj/core/doc/platforms/spoj) (Sphere Online Judge) (`/platforms/spoj`)
 
 Documents are available on [JSR](https://jsr.io/@un-oj/core/doc).
 

@@ -11,7 +11,8 @@
     "./platforms/leetcode": "./src/platforms/leetcode.ts",
     "./platforms/lyrio": "./src/platforms/lyrio.ts",
     "./platforms/luogu": "./src/platforms/luogu.ts",
-    "./platforms/mxoj": "./src/platforms/mxoj.ts"
+    "./platforms/mxoj": "./src/platforms/mxoj.ts",
+    "./platforms/spoj": "./src/platforms/spoj.ts"
   },
   "publish": {
     "include": [
