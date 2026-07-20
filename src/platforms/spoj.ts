@@ -98,10 +98,13 @@ export default class SPOJ extends Platform {
 
     // Description: the problem body HTML minus the title, tags, info table and
     // the "Information" heading. Samples remain inline (see type JSDoc above).
+    // The info table is targeted via the preceding `<h3>Information</h3>` so
+    // that any tables in the statement itself are preserved.
     body.find('h2').first().remove();
     body.find('a[href*="/problems/tag/"]').closest('p').remove();
-    body.find('table').remove();
-    body.find('h3').filter((_, el) => $(el).text().trim() === 'Information').remove();
+    const infoHeading = body.find('h3').filter((_, el) => $(el).text().trim() === 'Information');
+    infoHeading.next('table').remove();
+    infoHeading.remove();
     const description = body.html()?.trim();
     if (!description)
       throw new NotFoundError('statement');
@@ -144,7 +147,10 @@ function parseTimeLimit(s?: string): number | undefined {
   const m = s.match(/([\d.]+)\s*s/i);
   if (!m)
     return undefined;
-  return Math.round(Number(m[1]) * MS_PER_SECOND);
+  const n = Number(m[1]);
+  if (!Number.isFinite(n))
+    return undefined;
+  return Math.round(n * MS_PER_SECOND);
 }
 
 /**
@@ -162,7 +168,10 @@ function parseMemoryLimit(s?: string): number | undefined {
   const unit = MEMORY_UNITS[m[2].toUpperCase()];
   if (unit === undefined)
     return undefined;
-  return Math.round(Number(m[1]) * unit);
+  const n = Number(m[1]);
+  if (!Number.isFinite(n))
+    return undefined;
+  return Math.round(n * unit);
 }
 
 /**
